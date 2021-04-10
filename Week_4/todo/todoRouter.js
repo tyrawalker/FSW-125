@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router();
+const todoRouter = express.Router();
 const {v4:uuidv4} = require('uuid')
 
 //fake data 
@@ -17,11 +17,44 @@ let todos = [
 
 //routes
 //get all
-router.get('/', (req, res) => {
+todoRouter.get('/', (req, res) => {
     res.send(todos)
 })
 
 //get one
-router.get('/', (req,res) =. {
-    
+todoRouter.get('/:todoId', (req, res) =>{
+    const todoId = req.params.todoId; 
+    const singularTodo = todos.find(todo => todo._id === todoId)
+
+    res.send(singularTodo);
+});
+
+//post
+todoRouter.post('/', (req, res) =>{
+    const newItem = req.body; 
+    newItem._id- uuidv4(); 
+    todos.push(newItem)
+
+    console.log(todos)
+    res.send(`Successfully added a todo to your todo list`)
+} )
+
+//put
+todoRouter.put('/:todoId', (req, res) => {
+    const todoId = req.params.todoId; 
+    const todoIndex = todos.findIndex(todo => todo._id === todoId); 
+    Object.assign(todos[todoIndex], req.body);
+
+    res.send('Todo item successfully updated');
 })
+    
+//delete
+todoRouter.delete('/:todoId', (req, res) => {
+    const todoId = req.params.todoId; 
+    const todoIndex = todos.findIndex(todo => todo._id === todoId);
+    todos.splice(todoIndex, 1);
+
+    res.send('Todo successfully deleted from Todo List')
+})
+
+module.exports = todoRouter;

@@ -40,7 +40,7 @@ bountyRouter.get('/:bountyId', (req, res) =>{
 });
 
 //delete
-bountyRouter.delete('/:bookId',  (req, res) =>{
+bountyRouter.delete('/:bountyId',  (req, res) =>{
     const bountyId = req.params.bountyId; 
     const bountyIndex = bounties.findIndex(bounty => bounty._id === bountyId)
     bounties.splice(bountyIndex, 1);
@@ -49,7 +49,7 @@ bountyRouter.delete('/:bookId',  (req, res) =>{
 });
 
 //put
-bountyRouter.put('/:bookId',  (req, res) =>{
+bountyRouter.put('/:bountyId',  (req, res) =>{
     const bountyId = req.params.bountyId; 
     const bountyIndex = bounties.findIndex(bounty => bounty._id === bountyId);
     Object.assign(bounties[bountyIndex], req.body);

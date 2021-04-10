@@ -1,7 +1,7 @@
 //required scripting
 const express = require('express')
 const app = express()
-const PORT = 4000
+const PORT = 5000
 const bountyRouter = require('./bountyRouter')
 const {v4:uuidv4} = require('uuid')
 
